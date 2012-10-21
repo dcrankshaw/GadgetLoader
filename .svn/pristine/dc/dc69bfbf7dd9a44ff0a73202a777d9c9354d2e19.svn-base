@@ -1,116 +1,0 @@
-
--------------------------------------------------------------------------------
-   ROBOCOPY     ::     Robust File Copy for Windows                              
--------------------------------------------------------------------------------
-
-  Started : Wed Dec 14 21:05:53 2011
-
-   Source : C:\Users\crankshaw\Documents\GadgetLoader\GadgetLoader\bin\Release\
-     Dest : \\gw18\Indra\code\
-
-    Files : *.*
-	    
-  Options : *.* /COPY:DAT /R:1000000 /W:30 
-
-------------------------------------------------------------------------------
-
-	                  12	C:\Users\crankshaw\Documents\GadgetLoader\GadgetLoader\bin\Release\
-	    Newer     		       0	CopyLog.txt100%  100%  
-	    Newer     		  101376	GadgetLoader.exe  0%  100%  
-	    Newer     		  155136	GadgetLoader.pdb  0%   84%  100%  
-
-------------------------------------------------------------------------------
-
-                Total    Copied   Skipped  Mismatch    FAILED    Extras
-     Dirs :         1         0         1         0         0         0
-    Files :        12         3         9         0         0         0
-    Bytes :    4.47 m   250.5 k    4.22 m         0         0         0
-    Times :   0:00:00   0:00:00                       0:00:00   0:00:00
-
-    Speed :            21376000 Bytes/sec.
-    Speed :            1223.144 MegaBytes/min.
-
-    Ended : Wed Dec 14 21:05:54 2011
-
--------------------------------------------------------------------------------
-   ROBOCOPY     ::     Robust File Copy for Windows                              
--------------------------------------------------------------------------------
-
-  Started : Wed Dec 14 21:06:19 2011
-
-   Source : C:\Users\crankshaw\Documents\GadgetLoader\GadgetLoader\bin\Release\
-     Dest : \\gw18\Indra\code\
-
-    Files : *.*
-	    
-  Options : *.* /S /E /COPY:DAT /PURGE /MIR /R:1000000 /W:30 
-
-------------------------------------------------------------------------------
-
-	                  12	C:\Users\crankshaw\Documents\GadgetLoader\GadgetLoader\bin\Release\
-	    Newer     		    1407	CopyLog.txt  0%   49%  
-	    Newer     		  101376	GadgetLoader.exe  0%  100%  
-	    Newer     		  155136	GadgetLoader.pdb  0%   84%  100%  
-	                   2	C:\Users\crankshaw\Documents\GadgetLoader\GadgetLoader\bin\Release\.svn\
-	                   8	C:\Users\crankshaw\Documents\GadgetLoader\GadgetLoader\bin\Release\.svn\prop-base\
-	                   0	C:\Users\crankshaw\Documents\GadgetLoader\GadgetLoader\bin\Release\.svn\props\
-	                  11	C:\Users\crankshaw\Documents\GadgetLoader\GadgetLoader\bin\Release\.svn\text-base\
-	                   0	C:\Users\crankshaw\Documents\GadgetLoader\GadgetLoader\bin\Release\.svn\tmp\
-	                   0	C:\Users\crankshaw\Documents\GadgetLoader\GadgetLoader\bin\Release\.svn\tmp\prop-base\
-	                   0	C:\Users\crankshaw\Documents\GadgetLoader\GadgetLoader\bin\Release\.svn\tmp\props\
-	                   0	C:\Users\crankshaw\Documents\GadgetLoader\GadgetLoader\bin\Release\.svn\tmp\text-base\
-
-------------------------------------------------------------------------------
-
-                Total    Copied   Skipped  Mismatch    FAILED    Extras
-     Dirs :         9         0         9         0         0         0
-    Files :        33         3        30         0         0         0
-    Bytes :    8.94 m   251.8 k    8.69 m         0         0         0
-    Times :   0:00:00   0:00:00                       0:00:00   0:00:00
-
-    Speed :            16119937 Bytes/sec.
-    Speed :             922.390 MegaBytes/min.
-
-    Ended : Wed Dec 14 21:06:19 2011
-
--------------------------------------------------------------------------------
-   ROBOCOPY     ::     Robust File Copy for Windows                              
--------------------------------------------------------------------------------
-
-  Started : Sun Feb 26 11:21:15 2012
-
-   Source : C:\Users\crankshaw\Documents\GadgetLoader\GadgetLoader\bin\Release\
-     Dest : \\gw18\Indra\code\
-
-    Files : *.*
-	    
-  Options : *.* /S /E /COPY:DAT /PURGE /MIR /R:1000000 /W:30 
-
-------------------------------------------------------------------------------
-
-	                  12	C:\Users\crankshaw\Documents\GadgetLoader\GadgetLoader\bin\Release\
-	    Newer     		    3668	CopyLog.txt  0%    5%  
-	    Newer     		  101888	GadgetLoader.exe  0%  100%  
-	    Newer     		  167424	GadgetLoader.pdb  0%   78%  100%  
-	    Newer     		   11608	GadgetLoader.vshost.exe  0%  100%  
-	                   2	C:\Users\crankshaw\Documents\GadgetLoader\GadgetLoader\bin\Release\.svn\
-	                   8	C:\Users\crankshaw\Documents\GadgetLoader\GadgetLoader\bin\Release\.svn\prop-base\
-	                   0	C:\Users\crankshaw\Documents\GadgetLoader\GadgetLoader\bin\Release\.svn\props\
-	                  11	C:\Users\crankshaw\Documents\GadgetLoader\GadgetLoader\bin\Release\.svn\text-base\
-	                   0	C:\Users\crankshaw\Documents\GadgetLoader\GadgetLoader\bin\Release\.svn\tmp\
-	                   0	C:\Users\crankshaw\Documents\GadgetLoader\GadgetLoader\bin\Release\.svn\tmp\prop-base\
-	                   0	C:\Users\crankshaw\Documents\GadgetLoader\GadgetLoader\bin\Release\.svn\tmp\props\
-	                   0	C:\Users\crankshaw\Documents\GadgetLoader\GadgetLoader\bin\Release\.svn\tmp\text-base\
-
-------------------------------------------------------------------------------
-
-                Total    Copied   Skipped  Mismatch    FAILED    Extras
-     Dirs :         9         0         9         0         0         0
-    Files :        33         4        29         0         0         0
-    Bytes :    8.95 m   277.9 k    8.68 m         0         0         0
-    Times :   0:00:00   0:00:00                       0:00:00   0:00:00
-
-    Speed :             6775904 Bytes/sec.
-    Speed :             387.720 MegaBytes/min.
-
-    Ended : Sun Feb 26 11:21:15 2012
