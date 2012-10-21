@@ -1,0 +1,184 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.IO;
+using System.Collections;
+
+namespace GadgetLoader
+{
+    class LoaderSummary
+    {
+
+        private string summaryFile;
+        private string bcpCommands;
+        private string bcpFile;
+        public List<FileSummary> snapFileSummaries;
+        //public FileSummary[] snapFileSummaries;
+        public string errorString;
+
+        public LoaderSummary()
+        {
+            summaryFile = null;
+            errorString = String.Empty;
+            snapFileSummaries = null;
+            bcpCommands = "";
+            bcpFile = "";
+        }
+
+        public LoaderSummary(string outfile)
+        {
+            summaryFile = outfile;
+        }
+
+        public void setBCPFile(string file)
+        {
+            bcpFile = file;
+        }
+
+        public string getBCPfile()
+        {
+            return bcpFile;
+        }
+
+        public void setFile(string path)
+        {
+            summaryFile = path;
+        }
+
+        public void AddBCPCommand(string filename)
+        {
+            bcpCommands += "bcp " + LoaderConstants.database + "." + LoaderConstants.table + " in " + filename
+                + " -n -S " + LoaderConstants.server + " -T\r\n";
+        }
+
+        public void setFileSummaries(List<FileSummary> s)
+        {
+            snapFileSummaries = s;
+        }
+
+        //returns true if no errors, else returns false
+        public bool checkFileErrors()
+        {
+            if (snapFileSummaries != null)
+            {
+                foreach(FileSummary f in snapFileSummaries)
+                {
+                    if (f.badStatus)
+                        return false;
+                }
+                return true;
+            }
+            else
+                return false;
+        }
+
+        public string toString()
+        {
+            if (snapFileSummaries == null)
+            {
+                return errorString;
+            }
+            else
+            {
+                string wholeSummary = errorString + "\r\n";
+                foreach (FileSummary f in snapFileSummaries)
+                {
+                    wholeSummary = wholeSummary + f.ToString();
+                }
+
+                return wholeSummary;
+            }
+        }
+
+        public void addError(string s)
+        {
+            errorString = errorString + "\r\n" + s;
+        }
+
+        public void writeBCPFile()
+        {
+            using (StreamWriter writer = new StreamWriter(bcpFile))
+            {
+                writer.WriteLine("@echo off");
+                writer.WriteLine(bcpCommands);
+                //writer.WriteLine("echo bcp script for snapshot " + 
+
+            }
+        }
+
+        public void writeSummary()
+        {
+            if (summaryFile == null)
+            {
+                Console.WriteLine(this.toString());
+            }
+            else
+            {
+                try
+                {
+                    using (StreamWriter writer = new StreamWriter(new FileStream(summaryFile, FileMode.Create)))
+                    {
+                        writer.WriteLine(this.toString());
+
+                    }
+                }
+                catch (Exception e)
+                {
+                    this.addError(e.Message);
+                    Console.WriteLine(this.toString());
+                }
+            }
+
+        }
+    }
+
+
+    public class FileSummary
+    {
+        public DateTime start { get; set; }
+        public DateTime end { get; set; }
+        public TimeSpan duration { get; set; }
+        public uint numParticles { get; set; }
+        public string inFileName { get; set; }
+        public string outFileName { get; set; }
+        public string status { get; set; }
+        public bool warning { get; set; }
+        public string warningMessage { get; set; }
+        public bool badStatus { get; set; }
+        public string statusMessage { get; set; }
+        public string summaryFileName { get; set; }
+        public string fullPath { get; set; }
+        public int fileNumber { get; set; }
+
+        public FileSummary()
+        {
+            warning = false;
+            badStatus = false;
+
+        }
+
+
+        public override string ToString()
+        {
+            string val =
+                "File " + fileNumber + ":\r\n\t" +
+                "Start: " + start.ToString() +",\r\n\t" +
+                "End: " + end.ToString() + ",\r\n\t" +
+                "Time: " + duration.TotalSeconds.ToString() + ",\r\n\t" +
+                "Points Contained: " + numParticles + ",\r\n\t" +
+                "Input " + inFileName + ",\r\n\t" +
+                "Output " + outFileName + ",\r\n" + status;
+
+            if (warning)
+            {
+                val = val + "Warning: " + warningMessage + "\r\n";
+            }
+            if (badStatus)
+            {
+                val = val + "Error: " + statusMessage + "\r\n";
+            }
+            return val;
+        }
+    }
+}

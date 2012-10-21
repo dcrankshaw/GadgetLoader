@@ -1,0 +1,14 @@
+﻿Things to be implemented:
+
+1) Partition into multiple bounding boxes based on periodic boundary conditions
+	-Treat each dimension independently
+	-Also consider the case where cluster doesn't cross over, but with added padding
+	 it will
+
+2) Bloom Filter probing for cells within bounding sphere
+	-Create Bloom filter for each cell in each timestep
+
+3) Use Bounding spheres instead of boxes
+	-For padding, just find bounding sphere then add padding to the radius
+	-Replace process of finding potential PH cells, the change should be
+	 transparent to the rest of the code

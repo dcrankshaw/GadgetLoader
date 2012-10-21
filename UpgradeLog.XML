@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="GadgetLoader">
+</Property><Property Name="Solution File" Value="C:\Users\crankshaw\Documents\GadgetLoader\GadgetLoader.sln">
+</Property><Property Name="User Options File" Value="C:\Users\crankshaw\Documents\GadgetLoader\GadgetLoader.suo">
+</Property><Property Name="Date" Value="Wednesday, June 08, 2011">
+</Property><Property Name="Time" Value="14:16 PM">
+</Property></Properties><Event ErrorLevel="0" Project="" Source="GadgetLoader.sln" Description="File successfully backed up as C:\Users\crankshaw\Documents\GadgetLoader\Backup\GadgetLoader.sln">
+</Event><Event ErrorLevel="0" Project="" Source="GadgetLoader.suo" Description="File successfully backed up as C:\Users\crankshaw\Documents\GadgetLoader\Backup\GadgetLoader.suo">
+</Event><Event ErrorLevel="0" Project="GadgetLoader" Source="GadgetLoader\GadgetLoader.csproj" Description="Project file successfully backed up as C:\Users\crankshaw\Documents\GadgetLoader\Backup\GadgetLoader\GadgetLoader.csproj">
+</Event><Event ErrorLevel="0" Project="GadgetLoader" Source="GadgetLoader\Cell.cs" Description="File successfully backed up as C:\Users\crankshaw\Documents\GadgetLoader\Backup\GadgetLoader\Cell.cs">
+</Event><Event ErrorLevel="0" Project="GadgetLoader" Source="GadgetLoader\FOFOrderedSnapFile.cs" Description="File successfully backed up as C:\Users\crankshaw\Documents\GadgetLoader\Backup\GadgetLoader\FOFOrderedSnapFile.cs">
+</Event><Event ErrorLevel="0" Project="GadgetLoader" Source="GadgetLoader\GalaxiesFile.cs" Description="File successfully backed up as C:\Users\crankshaw\Documents\GadgetLoader\Backup\GadgetLoader\GalaxiesFile.cs">
+</Event><Event ErrorLevel="0" Project="GadgetLoader" Source="GadgetLoader\frmMain.cs" Description="File successfully backed up as C:\Users\crankshaw\Documents\GadgetLoader\Backup\GadgetLoader\frmMain.cs">
+</Event><Event ErrorLevel="0" Project="GadgetLoader" Source="GadgetLoader\frmMain.Designer.cs" Description="File successfully backed up as C:\Users\crankshaw\Documents\GadgetLoader\Backup\GadgetLoader\frmMain.Designer.cs">
+</Event><Event ErrorLevel="0" Project="GadgetLoader" Source="GadgetLoader\GroupFile.cs" Description="File successfully backed up as C:\Users\crankshaw\Documents\GadgetLoader\Backup\GadgetLoader\GroupFile.cs">
+</Event><Event ErrorLevel="0" Project="GadgetLoader" Source="GadgetLoader\HsmlFile.cs" Description="File successfully backed up as C:\Users\crankshaw\Documents\GadgetLoader\Backup\GadgetLoader\HsmlFile.cs">
+</Event><Event ErrorLevel="0" Project="GadgetLoader" Source="GadgetLoader\HsmlReader.cs" Description="File successfully backed up as C:\Users\crankshaw\Documents\GadgetLoader\Backup\GadgetLoader\HsmlReader.cs">
+</Event><Event ErrorLevel="0" Project="GadgetLoader" Source="GadgetLoader\IdFile.cs" Description="File successfully backed up as C:\Users\crankshaw\Documents\GadgetLoader\Backup\GadgetLoader\IdFile.cs">
+</Event><Event ErrorLevel="0" Project="GadgetLoader" Source="GadgetLoader\DebugOut.cs" Description="File successfully backed up as C:\Users\crankshaw\Documents\GadgetLoader\Backup\GadgetLoader\DebugOut.cs">
+</Event><Event ErrorLevel="0" Project="GadgetLoader" Source="GadgetLoader\ParticleInfo.cs" Description="File successfully backed up as C:\Users\crankshaw\Documents\GadgetLoader\Backup\GadgetLoader\ParticleInfo.cs">
+</Event><Event ErrorLevel="0" Project="GadgetLoader" Source="GadgetLoader\PeanoHilbertID.cs" Description="File successfully backed up as C:\Users\crankshaw\Documents\GadgetLoader\Backup\GadgetLoader\PeanoHilbertID.cs">
+</Event><Event ErrorLevel="0" Project="GadgetLoader" Source="GadgetLoader\PeanoHilbertSetup.cs" Description="File successfully backed up as C:\Users\crankshaw\Documents\GadgetLoader\Backup\GadgetLoader\PeanoHilbertSetup.cs">
+</Event><Event ErrorLevel="0" Project="GadgetLoader" Source="GadgetLoader\Process.cs" Description="File successfully backed up as C:\Users\crankshaw\Documents\GadgetLoader\Backup\GadgetLoader\Process.cs">
+</Event><Event ErrorLevel="0" Project="GadgetLoader" Source="GadgetLoader\Program.cs" Description="File successfully backed up as C:\Users\crankshaw\Documents\GadgetLoader\Backup\GadgetLoader\Program.cs">
+</Event><Event ErrorLevel="0" Project="GadgetLoader" Source="GadgetLoader\Properties\AssemblyInfo.cs" Description="File successfully backed up as C:\Users\crankshaw\Documents\GadgetLoader\Backup\GadgetLoader\Properties\AssemblyInfo.cs">
+</Event><Event ErrorLevel="0" Project="GadgetLoader" Source="GadgetLoader\Properties\Resources.Designer.cs" Description="File successfully backed up as C:\Users\crankshaw\Documents\GadgetLoader\Backup\GadgetLoader\Properties\Resources.Designer.cs">
+</Event><Event ErrorLevel="0" Project="GadgetLoader" Source="GadgetLoader\Properties\Settings.Designer.cs" Description="File successfully backed up as C:\Users\crankshaw\Documents\GadgetLoader\Backup\GadgetLoader\Properties\Settings.Designer.cs">
+</Event><Event ErrorLevel="0" Project="GadgetLoader" Source="GadgetLoader\SnapFile.cs" Description="File successfully backed up as C:\Users\crankshaw\Documents\GadgetLoader\Backup\GadgetLoader\SnapFile.cs">
+</Event><Event ErrorLevel="0" Project="GadgetLoader" Source="GadgetLoader\SqlBinaryWriter.cs" Description="File successfully backed up as C:\Users\crankshaw\Documents\GadgetLoader\Backup\GadgetLoader\SqlBinaryWriter.cs">
+</Event><Event ErrorLevel="0" Project="GadgetLoader" Source="GadgetLoader\TreedataFile.cs" Description="File successfully backed up as C:\Users\crankshaw\Documents\GadgetLoader\Backup\GadgetLoader\TreedataFile.cs">
+</Event><Event ErrorLevel="0" Project="GadgetLoader" Source="GadgetLoader\Properties\Settings.settings" Description="File successfully backed up as C:\Users\crankshaw\Documents\GadgetLoader\Backup\GadgetLoader\Properties\Settings.settings">
+</Event><Event ErrorLevel="2" Project="GadgetLoader" Source="GadgetLoader\tables.sql" Description="Failed to backup file as C:\Users\crankshaw\Documents\GadgetLoader\Backup\GadgetLoader\tables.sql">
+</Event><Event ErrorLevel="0" Project="GadgetLoader" Source="GadgetLoader\varia\readSubhaloTable.pro" Description="File successfully backed up as C:\Users\crankshaw\Documents\GadgetLoader\Backup\GadgetLoader\varia\readSubhaloTable.pro">
+</Event><Event ErrorLevel="0" Project="GadgetLoader" Source="GadgetLoader\varia\ReadTreeDBIds.pro" Description="File successfully backed up as C:\Users\crankshaw\Documents\GadgetLoader\Backup\GadgetLoader\varia\ReadTreeDBIds.pro">
+</Event><Event ErrorLevel="0" Project="GadgetLoader" Source="GadgetLoader\varia\ReadTrees.pro" Description="File successfully backed up as C:\Users\crankshaw\Documents\GadgetLoader\Backup\GadgetLoader\varia\ReadTrees.pro">
+</Event><Event ErrorLevel="0" Project="GadgetLoader" Source="GadgetLoader\frmMain.resx" Description="File successfully backed up as C:\Users\crankshaw\Documents\GadgetLoader\Backup\GadgetLoader\frmMain.resx">
+</Event><Event ErrorLevel="0" Project="GadgetLoader" Source="GadgetLoader\Properties\Resources.resx" Description="File successfully backed up as C:\Users\crankshaw\Documents\GadgetLoader\Backup\GadgetLoader\Properties\Resources.resx">
+</Event><Event ErrorLevel="0" Project="GadgetLoader" Source="GadgetLoader\GadgetLoader.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="GadgetLoader" Source="GadgetLoader\GadgetLoader.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="" Source="GadgetLoader.sln" Description="Solution converted successfully">
+</Event><Event ErrorLevel="3" Project="" Source="GadgetLoader.sln" Description="Converted">
+</Event><Event ErrorLevel="0" Project="GadgetLoader" Source="GadgetLoader\GadgetLoader.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event></UpgradeLog>

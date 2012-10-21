@@ -1,0 +1,9 @@
+C:\Users\crankshaw\Documents\GadgetLoader\BloomFilter\BoundingBox\bin\Debug\BoundingBox.exe
+C:\Users\crankshaw\Documents\GadgetLoader\BloomFilter\BoundingBox\bin\Debug\BoundingBox.pdb
+C:\Users\crankshaw\Documents\GadgetLoader\BloomFilter\BoundingBox\bin\Debug\Jhu.SqlServer.Array.dll
+C:\Users\crankshaw\Documents\GadgetLoader\BloomFilter\BoundingBox\bin\Debug\Jhu.SqlServer.Array.Parser.dll
+C:\Users\crankshaw\Documents\GadgetLoader\BloomFilter\BoundingBox\bin\Debug\Jhu.SqlServer.Array.pdb
+C:\Users\crankshaw\Documents\GadgetLoader\BloomFilter\BoundingBox\bin\Debug\Jhu.SqlServer.Array.Parser.pdb
+C:\Users\crankshaw\Documents\GadgetLoader\BloomFilter\BoundingBox\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\crankshaw\Documents\GadgetLoader\BloomFilter\BoundingBox\obj\x86\Debug\BoundingBox.exe
+C:\Users\crankshaw\Documents\GadgetLoader\BloomFilter\BoundingBox\obj\x86\Debug\BoundingBox.pdb

@@ -1,0 +1,107 @@
+﻿/* Tamas 2011-02-17 */
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.IO;
+using System.Data.SqlTypes;
+using System.Collections;
+
+using Jhu.SqlServer.Array;
+
+namespace GadgetLoader
+{
+    public class SqlBinaryWriter : BinaryWriter
+    {
+        
+        public SqlBinaryWriter(Stream output)
+            : base(output)
+        {
+        }
+
+        /// <summary>
+        /// TBD is this method calling itself when using this.Write iso base.Write ???
+        /// </summary>
+        /// <param name="b"></param>
+        public void Write(SqlBinary b)
+        {
+            this.Write(b.Value.LongLength);
+            base.Write(b.Value);
+        }
+
+        public void Write(SqlBytes b)
+        {
+            this.Write(b.Value.LongLength);
+            base.Write(b.Value);
+        }
+        public void Write(SqlRealArrayMax a)
+        {
+            SqlBytes b = a.ToSqlBuffer();
+            this.Write(b);
+        }
+        public void Write(SqlBigIntArrayMax a)
+        {
+            SqlBytes b = a.ToSqlBuffer();
+            this.Write(b);
+        }
+
+        public void Write(SqlIntArrayMax a)
+        {
+            SqlBytes b = a.ToSqlBuffer();
+            this.Write(b);
+        }
+
+        /* For writing a row in a snapshot file using arrays */
+        public void WriteCell(Cell c)
+        {
+            this.Write(c.SnapNum);
+            this.Write(c.PHKey);
+            this.Write(c.Count);
+            
+            try
+            {
+                this.Write(SqlRealArrayMax.FromArray(c.PosToArray()));
+                this.Write(SqlRealArrayMax.FromArray(c.VelToArray()));
+                this.Write(SqlBigIntArrayMax.FromArray(c.IdToArray()));
+                this.Write(new SqlBinary(c.filter.convertToByteArray()));
+            }
+            catch (OverflowException e)
+            {
+                Console.Write(e.Message);
+            }
+        }
+
+        //binwriter.Write(isnap, time2, nsize, fft_re[], fft_im[]);
+
+        public void WriteFFTModes(short snapnum, double time, int nsize, float[, ,] re, float[, ,] im)
+        {
+            this.Write(snapnum);
+            this.Write(time);
+            this.Write(nsize);
+            //probably don't need these rows
+            /*this.Write(re.GetLength(0));
+            this.Write(re.GetLength(1));
+            this.Write(re.GetLength(2));*/
+
+            this.Write(SqlRealArrayMax.FromArray(re));
+            this.Write(SqlRealArrayMax.FromArray(im));
+        }
+
+        /* For writing FOF groups */
+        public void WriteFoFGroup(long[] idArr, short snapnum, int haloID, BloomFilter.Filter<long> filter)
+        {
+            this.Write(snapnum);
+            this.Write(haloID);
+            this.Write(idArr.Length);
+            try
+            {
+                this.Write(SqlBigIntArrayMax.FromArray(idArr));
+                this.Write(new SqlBinary(filter.convertToByteArray()));
+            }
+            catch(OverflowException e)
+            {
+                Console.Write(e.Message);
+            }
+        }
+    }
+}

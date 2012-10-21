@@ -1,0 +1,61 @@
+﻿Analysis Questions:
+How does the padding affect the total bounding box size?
+	-the k largest groups
+	-the k median groups
+	-the k smallest groups
+How does the size of the bounding box (measured in number of PH cells) affect query time?
+For each padding level:
+	Time queries looking up initial, midpoint, and final positions
+		-do for top k groups,
+		-k median groups,
+		-k smallest groups
+
+
+The real issue that the bounding boxes address is limiting the space of phcells we need to unlock.
+This is done at the cost of putting all phcell particles inside the bounding box into a table and then
+doing a join on this table. If the bounding box is too big, this join (even with only half the particles)
+can be very expensive (on the same order as looking at all of the phcells)*. But really the statistic to
+look at is how well the bounding boxes limit the number of phcells need to look at. To evaluate this in terms
+of query time, we can look at how long it takes to unpack a phcell and join on partid with the fofgroup.
+	-*problem with this approach is whether the big join (on all possible partids) has different timing as just
+	joining on each individual cell seperately (as in the naive approach), but this is probably not too bif of a deal
+	-also make sure that I am correctly identifying number of phcells to look up as the bottleneck
+
+
+
+Bounding Box vs no bounding box
+Problem: the biggest bottleneck when matching fof groups to positions is unpacking all of the
+	phcell arrays to find the particles within that fof group
+Solution: Limit the number of arrays we need to unpack by finding the initial positions of 
+
+Gains:
+	Limit number of phcells we need to look at (aka lowers disk access)
+		-And indexed by phkey so this is a fast lookup (not random I/O)
+Cost:
+	Increased cpu usage: cpu not the limiting factor, this is fine
+	Increased pre-processing time, but this is done offline and is fast enough to still be feasible
+		!!!Get numbers
+	Increased space:
+		Get numbers
+	Hash join
+
+
+Bounding Box padding size:
+	Find relationship between padding and:
+		-avg space overhead
+		-avg increase in phcells to examine
+		-min size for accuracy
+
+
+Future Improvements:
+	-Change padding size based on timestep (e.g. particles won't move more than 15 by ts 30, but could move 35 by timestep 60)
+	-Not addressing boundary conditions right now. Makes creating bounding boxes more complicated. Need criteria to decide when
+	the should go through the middle (naive case) and when it should go through the sides. This should address some of the issues
+	with really large bounding boxes we have right now. It looks like in our current simulation, a bounding box with a padding of
+	40 should be sufficient for the end of the simulation (could use less padding earlier, see above point).
+	-Most of the fof groups are really small. Are those just as important or do we care more about the bigger groups?
+	-Another option to address the boundary conditions (at the cost of much higher preprocessing time) is to create a bounding box
+	for each particle in a fof group, and make the bounding box for the group the union of all of these individual bounding boxes.
+	This would be more accurate, but take significantly longer to compute.
+		-This is another thing to test
+			-can time how much longer to compute (e.g. for a timestep), and the avg difference in bounding box size

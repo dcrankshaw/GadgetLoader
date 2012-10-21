@@ -1,0 +1,183 @@
+﻿using System;
+using System.IO;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Data.SqlClient;
+using Jhu.SqlServer.Array;
+using System.Diagnostics;
+using GadgetLoader;
+
+namespace BoundingBox
+{
+    class Program
+    {
+        //Command line args of the form:
+            // BoundingBox localhost SimDBdev 0 0 4
+            // BoundingBox {SERVER} {DATABASE} {TIMESTEP} {MINFOF} {MAXFOF}
+        static void Main(string[] args)
+        {
+            string server = args[0];
+            string database = args[1];
+            short timestep = Int16.Parse(args[2]);
+            int minFofID = Int32.Parse(args[3]);
+            int maxFofID = Int32.Parse(args[4]);
+            using (StreamWriter writer = new StreamWriter("D:\\loader_testing\\phcells.txt", false))
+            {
+                for (int i = minFofID; i <= maxFofID; i++)
+                {
+                    BoundingBox current = new BoundingBox(server, database, timestep, i);
+                    SortedSet<int> cells = current.GetPHCells();
+                    writer.WriteLine("Snap: {0}\tFoFID: {1}\tRepeats: {2}\tNum Cells: {3}", timestep, i, current.numRepeats, cells.Count);
+                    foreach (int cell in cells)
+                    {
+                        writer.WriteLine(cell);
+                    }
+                }
+            }   
+        }
+    }
+
+    //Creates the Bounding Box for a given FOFGroup
+    class BoundingBox
+    {
+        float padding;
+        double phboxinv;
+        int phbits;
+        float box;
+        string server;
+        string database;
+        short snapshot;
+        int fofID;
+        float maxX, maxY, maxZ, minX, minY, minZ;
+        public int numRepeats;
+
+        public BoundingBox(string svr, string db, short ts, int fid)
+        {
+            padding = 30.0f;
+            numRepeats = 0;
+            phbits = 6;
+            box = 1000f;
+            phboxinv = ((double)(1 << phbits)) / box;
+            maxX = -1f;
+            maxY = -1f;
+            maxZ = -1f;
+            minX = box + 1;
+            minY = box + 1;
+            minZ = box + 1;
+            server = svr;
+            database = db;
+            snapshot = ts;
+            fofID = fid;
+            GetPosList();
+        }
+
+        private int GetPHKey(double x, double y, double z)
+        {
+            int ix = (int)Math.Floor(x * phboxinv);
+            int iy = (int)Math.Floor(y * phboxinv);
+            int iz = (int)Math.Floor(z * phboxinv);
+            return PeanoHilbertID.GetPeanoHilbertID(phbits, ix, iy, iz);
+        }
+        
+        //creates the list of Peano-Hilbert Cells that this bounding box intersects
+        public SortedSet<int> GetPHCells()
+        {
+            SortedSet<int> cells = new SortedSet<int>();
+            float oneThird = 1f / 3f;
+            float cellLength = (float) Math.Pow(Math.Pow(box, 3) / Math.Pow(8, phbits), oneThird);
+            for (float z = minZ; z <= maxZ; z += cellLength)
+            {
+                for (float y = minY; y <= maxY; y += cellLength)
+                {
+                    for (float x = minX; x <= maxX; x += cellLength)
+                    {
+                        if (!cells.Add(GetPHKey(x, y, z)))
+                        {
+                            numRepeats++;
+                        }
+                    }
+                }
+            }
+            return cells;
+        }
+
+        private static string createConnString(string db, string server)
+        {
+            return "server=" + server + ";database=" + db + ";Trusted_Connection=true;Asynchronous Processing = true";
+        }
+
+        /*
+         *      string command = "select * from dbo.config where sim = @sim and snapnum = @snapnum";
+                SqlCommand myCommand = new SqlCommand(command, configConn);
+                SqlParameter timestepParam = new SqlParameter("@snapnum", System.Data.SqlDbType.SmallInt);
+                SqlParameter simParam = new SqlParameter("@sim", System.Data.DbType.String);
+                timestepParam.Value = opts.timestep;
+                simParam.Value = opts.sim;
+                myCommand.Parameters.Add(timestepParam);
+                myCommand.Parameters.Add(simParam);
+         */
+
+        private void GetPosList()
+        {
+            try
+            {
+                SqlConnection conn = new SqlConnection(createConnString(database, server));
+                conn.Open();
+
+                SqlDataReader myReader = null;
+                string getFoFPartidList = "select x, y, z from SimDBdev.dbo.getinitposFoFGroup(@snap, @fof)";
+                SqlCommand partidListCommand = new SqlCommand(getFoFPartidList, conn);
+                SqlParameter timestepParam = new SqlParameter("@snap", System.Data.SqlDbType.SmallInt);
+                timestepParam.Value = snapshot;
+                SqlParameter fofParam = new SqlParameter("@fof", System.Data.SqlDbType.Int);
+                fofParam.Value = fofID;
+                partidListCommand.Parameters.Add(timestepParam);
+                partidListCommand.Parameters.Add(fofParam);
+                myReader = partidListCommand.ExecuteReader();
+                //float maxX = -1f, maxY = -1f, maxZ = -1f, minX = 1001f, minY = 1001f, minZ = 1001f;
+                int numLines = 0;
+                while (myReader.Read())
+                {
+                    float curX = float.Parse(myReader["x"].ToString());
+                    float curY = float.Parse(myReader["y"].ToString());
+                    float curZ = float.Parse(myReader["z"].ToString());
+                    if (curX < minX)
+                        minX = curX;
+                    if (curX > maxX)
+                        maxX = curX;
+                    if (curY < minY)
+                        minY = curY;
+                    if (curY > maxY)
+                        maxY = curY;
+                    if (curZ < minZ)
+                        minZ = curZ;
+                    if (curZ > maxZ)
+                        maxZ = curZ;
+                    numLines++;
+                }
+                Debug.Assert(numLines > 0);
+                // add padding to bounding box to account for particle movement
+                minX = minX - padding;
+                minX = minX > 0f ? minX : 0f;
+                minY = minY - padding;
+                minY = minY > 0f ? minY : 0f;
+                minZ = minZ - padding;
+                minZ = minZ > 0f ? minZ : 0f;
+
+                maxX = maxX + padding;
+                maxX = maxX < box ? maxX : 1000f;
+                maxY = maxY + padding;
+                maxY = maxY < box ? maxY : 1000f;
+                maxZ = maxZ + padding;
+                maxZ = maxZ < box ? maxZ : 1000f;
+
+            }
+            catch(Exception e)
+            {
+                throw new Exception("Bad data in DB " + e.Message);
+            }
+        }
+
+    }
+}

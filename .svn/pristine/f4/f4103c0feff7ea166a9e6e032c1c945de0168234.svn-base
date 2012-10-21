@@ -1,0 +1,26 @@
+﻿Use SimDBdev
+go
+if object_id (N'dbo.getinitposFoFGroup', N'TF') is not null
+		drop function dbo.getinitposFoFGroup
+go
+
+Use SimDBdev
+go
+create function dbo.getinitposFoFGroup (@sn_fof smallint, @fid int)
+										returns @results table( x real, y real, z real )
+as
+begin
+
+declare @fofpartids varbinary(max)
+set @fofpartids = (select partids from SimDBdev.dbo.fofgroups
+					where snapnum = @sn_fof and fofID = @fid)
+
+declare @fofids_tab table(id bigint)
+insert into @fofids_tab select v from SqlArray.BigIntArrayMax.ToTable(@fofpartids)
+
+insert into @results select snap.x, snap.y, snap.z from dbo.id_pos_orig as snap inner join @fofids_tab as fofs
+	on fofs.id = snap.orig_id and snap.snapnum = 0
+
+return
+end
+go

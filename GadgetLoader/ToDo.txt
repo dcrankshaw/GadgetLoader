@@ -1,0 +1,15 @@
+﻿
+Make sure that it can still run in GUI mode
+
+x Read constants from a parameters table
+
+x Add CL support for FOF and FFT processes
+
+x add summary file writing to FOF and FFT processes
+
+
+Primary key support
+(i.e. file partitioning)
+
+
+Set up FFT file processing separately, should be done once per sim (instead of once per snapshot)

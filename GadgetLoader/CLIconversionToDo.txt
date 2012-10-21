@@ -1,0 +1,28 @@
+﻿
+Make sure that it can still run in GUI mode
+
+Read constants from a parameters table
+
+Add CL support for FOF and FFT processes
+
+add summary file writing to FOF and FFT processes
+
+size of bloom filters
+
+
+Primary key support
+(i.e. file partitioning)
+
+
+
+
+Bloom filter optimizations
+-variable size bloom filters
+-hierarchical bloom filters
+
+m=ceil((n * log(p)) / log(1.0 / pow(2.0, log (2.0)))));
+k= round(log(2.0) * m /n)
+from hur.st/bloomfilter
+
+for n = 500, p = 1.0E-8,
+	m = 19,171 (2.34KB) and k = 27

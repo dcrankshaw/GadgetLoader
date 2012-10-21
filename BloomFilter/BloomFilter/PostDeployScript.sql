@@ -1,0 +1,1 @@
+﻿create function AddFilterToSnap(SqlBigIntArrayMax ids, 
