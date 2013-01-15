@@ -203,7 +203,7 @@ namespace GadgetLoader
                         }
                         // now sort before writing files
                         // TODO
-                        //TBD this may not be necessary if the particles 
+                        // TBD this may not be necessary if the particles 
                         // are sorted in the files already.
                         Array.Sort<Structs>(parts, new ParticleComparator());
 
@@ -221,6 +221,7 @@ namespace GadgetLoader
                             {
                                 if (cell.Count > 0)
                                 {
+                                    // TODO(INDEX) create Cell index here
                                     binwriter.WriteCell(cell);
                                 }
                                 currentPHkey = parts[i].phkey;
@@ -232,7 +233,7 @@ namespace GadgetLoader
                         {
                             binwriter.WriteCell(cell);
                         }
-
+                        
 
                         // and add a bulk insert
                         //DebugOut.AddCommand(GetSnapDefault(outPath, snap, snapshotFilePrefix, curFile), snapshotTable);

@@ -2,6 +2,8 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GadgetLoader", "GadgetLoader\GadgetLoader.csproj", "{BC1A1094-FFB9-4E33-BF80-09E163D97150}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GadgetLoader.SqlServer", "GadgetLoader.SqlServer\GadgetLoader.SqlServer.csproj", "{87A58885-2587-4D8A-9BA7-3FA54153FD2F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,6 +14,12 @@ Global
 		{BC1A1094-FFB9-4E33-BF80-09E163D97150}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BC1A1094-FFB9-4E33-BF80-09E163D97150}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BC1A1094-FFB9-4E33-BF80-09E163D97150}.Release|Any CPU.Build.0 = Release|Any CPU
+		{87A58885-2587-4D8A-9BA7-3FA54153FD2F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{87A58885-2587-4D8A-9BA7-3FA54153FD2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{87A58885-2587-4D8A-9BA7-3FA54153FD2F}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{87A58885-2587-4D8A-9BA7-3FA54153FD2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{87A58885-2587-4D8A-9BA7-3FA54153FD2F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{87A58885-2587-4D8A-9BA7-3FA54153FD2F}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

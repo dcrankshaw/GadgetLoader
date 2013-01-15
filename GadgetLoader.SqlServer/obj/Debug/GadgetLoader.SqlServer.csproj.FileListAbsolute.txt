@@ -1,0 +1,5 @@
+C:\Users\crankshaw\Documents\GitHub\GadgetLoader\GadgetLoader.SqlServer\bin\Debug\GadgetLoader.SqlServer.dll
+C:\Users\crankshaw\Documents\GitHub\GadgetLoader\GadgetLoader.SqlServer\bin\Debug\GadgetLoader.SqlServer.pdb
+C:\Users\crankshaw\Documents\GitHub\GadgetLoader\GadgetLoader.SqlServer\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\crankshaw\Documents\GitHub\GadgetLoader\GadgetLoader.SqlServer\obj\Debug\GadgetLoader.SqlServer.dll
+C:\Users\crankshaw\Documents\GitHub\GadgetLoader\GadgetLoader.SqlServer\obj\Debug\GadgetLoader.SqlServer.pdb
