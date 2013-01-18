@@ -51,7 +51,7 @@ particlesPerSnap: 1024^3. This information allows for sanity checks while loadin
 groupTabPrefix: group_tab_
 groupIDPrefix: group_ids_
 
-CREATE TABLE MyDatabase.MySchema.params
+CREATE TABLE MyDatabase.dbo.params
 (
 	phbits int,
 	boxsize int,
@@ -70,7 +70,7 @@ snapnum: the snapshot number (0-63)
 inpath: where the raw binary files produced by the simulation are located
 outpath: where the processed files in MSSQL native format should be written to (they can then be loaded using a BCP script)
 
-CREATE TABLE MyDatabase.MySchema.config
+CREATE TABLE MyDatabase.dbo.config
 (
 	sim varchar(200),
 	snapnum int,
@@ -81,7 +81,7 @@ CREATE TABLE MyDatabase.MySchema.config
 
 Snapshot Data: The data output by the simulation
 
-CREATE TABLE MyDatabase.MySchema.MyTable
+CREATE TABLE MyDatabase.dbo.[MySimulation]_ParticleData
 (
 	snapnum smallint not null, --the snapshot number
 	phkey int not null, -- Peano-Hilbert index of this cell
@@ -94,11 +94,19 @@ CREATE TABLE MyDatabase.MySchema.MyTable
 
 Friend of Friends group data:
 
-CREATE TABLE MyDatabase.MySchema.MyTable
+CREATE TABLE MyDatabase.dbo.[MySimulation]_FoFGroupsData
 (
 	snapnum smallint not null, -- the snapshot this fof group was identified in
 	fofID int not null, -- an ID assigned to the fof group. Unique within a timestep but not throughout multiple time steps
 	numparts int not null, -- the number of particles in the group
 	partids varbinary(max) not null, -- a SqlArray of all the particles in the group
 	primary key (snapnum, fofID)
+)
+
+CREATE TABLE MyDatabase.dbo.[My_Simulation]_ReverseIndex
+(
+	partid bigint not null,
+	phkey varbinary(8000) not null, --array of 4 byte ints
+	slot varbinary(8000) not null,	--array of 2 byte ints
+	primary key(partid)
 )

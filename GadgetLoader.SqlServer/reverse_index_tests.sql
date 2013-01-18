@@ -10,42 +10,48 @@ go
 create table #reverse_index_insert
 (
 	partid bigint not null,
-	snapnum int not null,
+	snapnum smallint not null,
 	phkey int not null,
 	slot smallint not null, -- 0 indexed
 	primary key(partid, snapnum)
 )
 go
 
+declare @ph varbinary(8000)
+declare @slot varbinary(8000)
+set @ph = SimulationDB.dbo.CreatePHkeys()
+set @slot = SimulationDB.dbo.CreateSlots()
 
-insert into #reverse_index_test values(0, 7, 11)
-insert into #reverse_index_insert values(0, 7, 11, 13)
-insert into #reverse_index_test values(1, 8, 12)
-insert into #reverse_index_insert values(1, 8, 12, 14)
-insert into #reverse_index_test values(2, 9, 13)
-insert into #reverse_index_insert values(2, 9, 13, 15)
-insert into #reverse_index_test values(3, 10, 14)
-insert into #reverse_index_insert values(3, 10, 14, 16)
-insert into #reverse_index_test values(4, 11, 15)
-insert into #reverse_index_insert values(4, 11, 15, 17)
-insert into #reverse_index_test values(5, 12, 16)
-insert into #reverse_index_insert values(5, 12, 16, 18)
-insert into #reverse_index_test values(6, 13, 17)
-insert into #reverse_index_insert values(6, 13, 17, 19)
-insert into #reverse_index_test values(7, 14, 18)
-insert into #reverse_index_insert values(7, 14, 18, 20)
-insert into #reverse_index_test values(8, 15, 19)
-insert into #reverse_index_insert values(8, 15, 19, 21)
-insert into #reverse_index_test values(9, 16, 20)
-insert into #reverse_index_insert values(9, 16, 20, 22)
 
-WITH merge_index_CTE (partid, oldphkeys, newphkey, oldslots, newslot, snapnum)
+WITH merge_index_CTE (partid, oldphkeys, newphkey, snapnum, oldslots, newslot)
 AS
 (
-SELECT t.partid, t.phkey, i.phkey, t.slot, i.slot, i.snapnum
-FROM [#reverse_index_test] as t INNER JOIN #reverse_index_insert as i
+SELECT t.partid, t.phkey, i.phkey, i.snapnum, t.slot, i.slot
+FROM SimulationDB.dbo.revindextest_ReverseIndex as t INNER JOIN SimulationDB.dbo.revindextest_RIinsert_1 as i
 ON t.partid = i.partid
 )
-UPDATE #reverse_index_test
-SET phkey = SimulationDB.dbo.MergeSlots(m.oldphkeys, m.snapnum, m.newphkey)
+UPDATE SimulationDB.dbo.revindextest_ReverseIndex
+SET phkey = SimulationDB.dbo.MergePHkeys(m.oldphkeys, m.snapnum, m.newphkey), slot = SimulationDB.dbo.MergeSlots(m.oldslots, m.snapnum, m.newslot)
 FROM merge_index_CTE as m
+GO
+
+
+/*WITH merge_index_CTE (partid, oldslots, newslot, snapnum)
+AS
+(
+SELECT t.partid, t.slot, i.slot, i.snapnum
+FROM SimulationDB.dbo.revindextest_ReverseIndex as t INNER JOIN SimulationDB.dbo.revindextest_RIinsert_1 as i
+ON t.partid = i.partid
+)
+UPDATE SimulationDB.dbo.revindextest_ReverseIndex
+SET slot = SimulationDB.dbo.MergeSlots(m.oldslots, m.snapnum, m.newslot)
+FROM merge_index_CTE as m
+GO*/
+
+declare @ph varbinary(8000)
+declare @slot varbinary(8000)
+set @ph = (select top 1 phkey from #reverse_index_test)
+set @slot = (select top 1 slot from #reverse_index_test)
+select * from SimulationDB.IntArray.ToTable(@ph)
+select * from SimulationDB.SmallIntArray.ToTable(@slot)
+select * from #reverse_index_insert

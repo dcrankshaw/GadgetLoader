@@ -42,6 +42,7 @@ go
 -- parameter table values
 insert into SimDBdev.dbo.params values(6, 1000, 0, 31, 'snapshot_', 'True', 134217728, 'group_tab_', 'group_ids_')
 
+
 --compressed table declaration
 create table SimDBdev.dbo.compressedarraysnapshots
 (

@@ -14,12 +14,14 @@ namespace GadgetLoader
         private string snapBCPCommands;
         private string FOFBCPCommands;
         private string FFTBCPCommands;
+        private string IndexBCPCommands;
         private string bcpFile;
         private string database;
         private string server;
         private string snapTable;
         private string fofTable;
         private string fftTable;
+        private string indexTable;
         public List<SnapFileSummary> snapFileSummaries;
         public FOFSummary fofSummary;
         //public FileSummary[] snapFileSummaries;
@@ -33,13 +35,14 @@ namespace GadgetLoader
             snapBCPCommands = "";
             FOFBCPCommands = "";
             FFTBCPCommands = "";
+            IndexBCPCommands = "";
             bcpFile = "";
             server = s;
             database = db;
             snapTable = LoaderParamSingleton.getInstance().snapTable;
             fofTable = LoaderParamSingleton.getInstance().FOFTable;
             fftTable = LoaderParamSingleton.getInstance().FFTTable;
-
+            indexTable = LoaderParamSingleton.getInstance().indexTable;
         }
 
         public LoaderSummary(string outfile)
@@ -66,6 +69,14 @@ namespace GadgetLoader
         {
             snapBCPCommands += "bcp " + database + "." + snapTable + " in " + filename
                 + " -n -S " + server + " -T\r\n";
+        }
+
+        public void AddIndexBCPCommand(string filename)
+        {
+            IndexBCPCommands += "bcp " + database + "." + indexTable + " in " + filename
+                + " -n -S " + server + " -T\r\n";
+
+
         }
 
         public void AddFOFBCPCommand(string filename)
@@ -134,6 +145,7 @@ namespace GadgetLoader
                 writer.WriteLine(snapBCPCommands);
                 writer.WriteLine(FOFBCPCommands);
                 writer.WriteLine(FFTBCPCommands);
+                writer.WriteLine(IndexBCPCommands);
 
             }
         }
@@ -173,6 +185,7 @@ namespace GadgetLoader
         public uint numParticles { get; set; }
         public string inFileName { get; set; }
         public string outFileName { get; set; }
+        public string indexFileName { get; set; }
         public string status { get; set; }
         public bool warning { get; set; }
         public string warningMessage { get; set; }

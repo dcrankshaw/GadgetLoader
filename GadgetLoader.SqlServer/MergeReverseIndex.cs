@@ -8,6 +8,7 @@ using Jhu.SqlServer.Array;
 
 public partial class UserDefinedFunctions
 {
+    // Merge
     [Microsoft.SqlServer.Server.SqlFunction]
     public static SqlBinary MergePHkeys(SqlBinary oldPHkeys, SqlInt16 newSnap, SqlInt32 newPHkey)
     {
@@ -26,5 +27,22 @@ public partial class UserDefinedFunctions
         slots[(short) newSnap] = (short) newSlot;
         return SqlSmallIntArray.FromArray(slots).ToSqlBuffer();
     }
+
+    // Create
+    [Microsoft.SqlServer.Server.SqlFunction]
+    public static SqlBinary CreatePHkeys()
+    {
+        int[] keys = new int[64];
+        return SqlIntArray.FromArray(keys).ToSqlBuffer();
+    }
+
+    [Microsoft.SqlServer.Server.SqlFunction]
+    public static SqlBinary CreateSlots()
+    {
+        short[] slots = new short[64];
+        return SqlSmallIntArray.FromArray(slots).ToSqlBuffer();
+    }
+    
+
 };
 

@@ -103,6 +103,12 @@ namespace GadgetLoader
             this.Write(b);
         }
 
+        public void Write(SqlSmallIntArray a)
+        {
+            SqlBinary b = a.ToSqlBuffer();
+            this.Write(b);
+        }
+
         /// <summary>
         /// Writes a cell to a single row in a table by 
         /// putting all the ids, all the positions, and all velocities into
@@ -129,6 +135,38 @@ namespace GadgetLoader
                 // TODO: Log this in the summary file
                 Console.Write(e.Message);
             }
+        }
+
+        public void WriteReverseIndex(List<ReverseIndexEntry> index)
+        {
+            LoaderParamSingleton pars = LoaderParamSingleton.getInstance();
+            if (pars.firstSnapLoaded)
+            {
+                foreach (ReverseIndexEntry entry in index)
+                {
+                    this.Write(entry.partID);
+                    Int32[] phkeys = new Int32[LoaderParamSingleton.SNAPS_IN_SIMULATION];
+                    Int16[] offsets = new Int16[LoaderParamSingleton.SNAPS_IN_SIMULATION];
+                    phkeys[entry.snapnum] = entry.PHKey;
+                    offsets[entry.snapnum] = entry.slot;
+                    SqlIntArray phkeyArray = SqlIntArray.FromArray(phkeys);
+                    SqlSmallIntArray offsetArray = SqlSmallIntArray.FromArray(offsets);
+                    this.Write(phkeyArray);
+                    this.Write(offsetArray);
+                }
+            }
+            else
+            {
+                foreach (ReverseIndexEntry entry in index)
+                {
+                    this.Write(entry.partID);
+                    this.Write(entry.snapnum);
+                    this.Write(entry.PHKey);
+                    this.Write(entry.slot);
+                }
+            }
+
+
         }
 
         /// <summary>

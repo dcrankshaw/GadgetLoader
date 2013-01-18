@@ -14,6 +14,7 @@ namespace GadgetLoader
         internal const int expectedSize = 500;*/
 
         private static LoaderParamSingleton instance;
+        public const int SNAPS_IN_SIMULATION = 64;
 
 
         /* SqlConnection configConn = new SqlConnection(LoaderParamSingleton.getInstance().configTableConnectionString);
@@ -45,9 +46,18 @@ namespace GadgetLoader
             database = opts.database;
             server = opts.server;
             sim = opts.sim;
-            snapTable = "dbo." + sim + "snapshots";
-            FOFTable = "dbo." + sim + "fofGroups";
-            FFTTable = "dbo." + sim + "FFTData";
+            firstSnapLoaded = opts.firstSnap;
+            snapTable = "dbo." + sim + "_ParticleData";
+            FOFTable = "dbo." + sim + "_FoFGroupsData";
+            FFTTable = "dbo." + sim + "_FFTData";
+            if (firstSnapLoaded)
+            {
+                indexTable = "dbo." + sim + "_ReverseIndex";
+            }
+            else
+            {
+                indexTable = "dbo." + sim + "_RIinsert_" + opts.timestep;
+            }
             try
             {
                 SqlConnection paramConn = new SqlConnection(createConnString(opts.database, opts.server));
@@ -142,6 +152,10 @@ namespace GadgetLoader
         internal string FOFTable;
         internal string FFTTable;
         internal string sim;
+        internal string indexTable;
+
+        internal Boolean createReverseIndex = true;
+        internal Boolean firstSnapLoaded;
 
         public static string createConnString(string db, string server)
         {

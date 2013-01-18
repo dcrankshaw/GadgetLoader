@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using Jhu.SqlServer.Array;
+
 namespace GadgetLoader
 {
     /// <summary>
@@ -209,6 +211,53 @@ namespace GadgetLoader
                 v[i] = (long)this[i].id;
             }
             return v;
+        }
+
+        public List<ReverseIndexEntry> createIndex()
+        {
+            List<ReverseIndexEntry> index = new List<ReverseIndexEntry>();
+            for (short i = 0; i < Count; ++i)
+            {
+                ReverseIndexEntry current = new ReverseIndexEntry();
+                current.partID = (long) this[i].id;
+                current.snapnum = SnapNum;
+                current.PHKey = this.PHKey;
+                current.slot = i;
+                index.Add(current);
+
+            }
+            return index;
+
+        }
+
+    }
+
+    public struct ReverseIndexEntry
+    {
+        public Int64 partID;
+        public Int16 snapnum;
+        public Int32 PHKey;
+        public Int16 slot;
+
+        public void WriteBinaryForMerge(SqlBinaryWriter writer)
+        {
+            writer.Write(partID);
+            writer.Write(snapnum);
+            writer.Write(PHKey);
+            writer.Write(slot);
+        }
+
+        public void WriteBinaryFirstSnap(SqlBinaryWriter writer)
+        {
+            writer.Write(partID);
+            Int32[] phkeys = new Int32[LoaderParamSingleton.SNAPS_IN_SIMULATION];
+            Int16[] offsets = new Int16[LoaderParamSingleton.SNAPS_IN_SIMULATION];
+            phkeys[snapnum] = PHKey;
+            offsets[snapnum] = slot;
+            SqlIntArray phkeyArray = SqlIntArray.FromArray(phkeys);
+            SqlSmallIntArray offsetArray = SqlSmallIntArray.FromArray(offsets);
+            writer.Write(phkeyArray);
+            writer.Write(offsetArray);
         }
 
     }

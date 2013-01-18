@@ -993,7 +993,7 @@ namespace millimil
                 using(BinaryReader fofreader = new BinaryReader(new FileStream(fofFile+ifile,FileMode.Open)))
                 using(BinaryReader subhaloreader = new BinaryReader(new FileStream(subhaloFile+ifile,FileMode.Open)))
                 using (BinaryReader idreader = new BinaryReader(new FileStream(idsFile + ifile, FileMode.Open)))
-                using(BinaryWriter binwriter = new BinaryWriter(new FileStream(idsFile + ifile+".mssqlserver",FileMode.Create)))
+                using(BinaryWriter particleBinWriter = new BinaryWriter(new FileStream(idsFile + ifile+".mssqlserver",FileMode.Create)))
                 //using(StreamWriter csvwriter = new StreamWriter(new FileStream(idsFile + ifile+".csv",FileMode.Create)))
                 {
 
@@ -1086,7 +1086,7 @@ namespace millimil
                     Array.Sort(ids, new ParticleGroupIDComparator());
                     for (int i = 0; i < ids.Length; i++)
                     {
-                        ids[i].writeBin(binwriter);
+                        ids[i].writeBin(particleBinWriter);
 //                        csvwriter.Write(ids[i].ToString());
 //                        csvwriter.Write("\r\n");
                     }

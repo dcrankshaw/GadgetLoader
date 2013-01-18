@@ -178,11 +178,13 @@ namespace GadgetLoader
                 {
                     SnapFile curSnap = new SnapFile(filename);
                     // and open the stream for writing
-                    using (SqlBinaryWriter binwriter = new SqlBinaryWriter(new FileStream(GetSnapDefault(outPath, snap, snapshotFilePrefix, curFile), FileMode.Create)))
+                    using (SqlBinaryWriter particleBinWriter = new SqlBinaryWriter(new FileStream(GetSnapDefault(outPath, snap, snapshotFilePrefix, curFile), FileMode.Create)),
+                                           indexBinWriter = new SqlBinaryWriter(new FileStream(GetSnapDefault(outPath, snap, "rev_index_", curFile), FileMode.Create)))
                     {
                         Structs[] parts = new Structs[curSnap.numSample];
                         //record destination path in file summary
                         currentFileSummary.outFileName = GetSnapDefault(outPath, snap, snapshotFilePrefix, curFile);
+                        currentFileSummary.indexFileName = GetSnapDefault(outPath, snap, "rev_index_", curFile);
                         // now write each particle into the array
                         for (int i = 0; i < curSnap.numSample; i++)
                         {
@@ -209,12 +211,13 @@ namespace GadgetLoader
 
                         /*
                          * Sue: This is where you will want to put in a partitioning key
-                         * Every time there is a call to binwriter.WriteCell(cell), a single row is written.
+                         * Every time there is a call to particleBinWriter.WriteCell(cell), a single row is written.
                          * The best way to do it would be to just add an argument to the WriteCell method
                          * which is in SqlBinaryWriter.cs on line 113
                          */
                         Cell cell = new Cell(snap);
                         int currentPHkey = -1;
+                        LoaderParamSingleton pars = LoaderParamSingleton.getInstance();
                         for (int i = 0; i < curSnap.numSample; i++)
                         {
                             if (parts[i].phkey != currentPHkey)
@@ -222,7 +225,24 @@ namespace GadgetLoader
                                 if (cell.Count > 0)
                                 {
                                     // TODO(INDEX) create Cell index here
-                                    binwriter.WriteCell(cell);
+                                    particleBinWriter.WriteCell(cell);
+                                    List<ReverseIndexEntry> index = cell.createIndex();
+                                    indexBinWriter.WriteReverseIndex(index);
+                                    /*
+                                    if (pars.firstSnapLoaded)
+                                    {
+                                        foreach (ReverseIndexEntry entry in index)
+                                        {
+                                            entry.WriteBinaryFirstSnap(indexBinWriter);
+                                        }
+                                    }
+                                    else
+                                    {
+                                        foreach (ReverseIndexEntry entry in index)
+                                        {
+                                            entry.WriteBinaryForMerge(indexBinWriter);
+                                        }
+                                    }*/
                                 }
                                 currentPHkey = parts[i].phkey;
                                 cell.Init(currentPHkey);
@@ -231,7 +251,24 @@ namespace GadgetLoader
                         }
                         if (cell.Count > 0)
                         {
-                            binwriter.WriteCell(cell);
+                            particleBinWriter.WriteCell(cell);
+                            List<ReverseIndexEntry> index = cell.createIndex();
+                            indexBinWriter.WriteReverseIndex(index);
+                            /*if (pars.firstSnapLoaded)
+                            {
+                                foreach (ReverseIndexEntry entry in index)
+                                {
+                                    entry.WriteBinaryFirstSnap(indexBinWriter);
+                                }
+                            }
+                            else
+                            {
+                                foreach (ReverseIndexEntry entry in index)
+                                {
+                                    entry.WriteBinaryForMerge(indexBinWriter);
+                                }
+                            }
+                            */
                         }
                         
 
@@ -267,6 +304,7 @@ namespace GadgetLoader
                     if(currentFileSummary.outFileName != null)
                     {
                         globals.summary.AddSnapBCPCommand(currentFileSummary.outFileName);
+                        globals.summary.AddIndexBCPCommand(currentFileSummary.indexFileName);
                     }
                     curFile++;
                     // avoid outofmemory errors
@@ -705,7 +743,7 @@ namespace GadgetLoader
                             filter.Add(curGroupIds[j]);
                         }
 
-                        binwriter.WriteFoFGroup(curGroupIds, (short)isnap, i, filter);*/
+                        particleBinWriter.WriteFoFGroup(curGroupIds, (short)isnap, i, filter);*/
                         binwriter.WriteFoFGroup(curGroupIds, (short)isnap, i);
                     }
                 }

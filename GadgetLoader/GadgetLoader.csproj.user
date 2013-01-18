@@ -12,7 +12,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
     <StartAction>Project</StartAction>
-    <StartArguments>-z=30 -s -m=uncompressedarray -v=localhost -d=SimDBdev -q="D:\\loader_testing\\sqlcommands30.bat"</StartArguments>
+    <StartArguments>-z=2 -s -m=revindextest -v=gw18 -d=SimulationDB -q="C:\\Users\\crankshaw\\Documents\\sqlcommands\\sqlcommands2.bat"</StartArguments>
   </PropertyGroup>
   <PropertyGroup>
     <ReferencePath>C:\Users\crankshaw\Documents\ndesk-options-0.2.1.bin\ndesk-options-0.2.1.bin\lib\ndesk-options\</ReferencePath>

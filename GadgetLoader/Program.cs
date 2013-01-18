@@ -44,6 +44,8 @@ namespace GadgetLoader
 
                 { "z|timestep=", "sets the {TIMESTEP} to transform",
                     (short v) => {opts.timestep = v; } },
+                { "1|firstsnap", "true if this is the first snapshot loaded for this simulation",
+                    v => {opts.firstSnap = true; } },
                 /*{ "d|database=", "dictates what database the data will be loaded into",
                     v => {opts.database = v; } },
                 { "r|server=", "dictates what server the database is on",
@@ -374,6 +376,7 @@ namespace GadgetLoader
         public string server { get; set; }
         public string database { get; set; }
         public string sim { get; set; }
+        public bool firstSnap { get; set; }
 
         public CommandLineOptions()
         {
@@ -381,6 +384,7 @@ namespace GadgetLoader
             fof = false;
             fft = false;
             snap = false;
+            firstSnap = false;
             sqlCF = null;
             database = null;
             sim = null;
