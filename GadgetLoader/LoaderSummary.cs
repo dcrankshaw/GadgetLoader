@@ -73,10 +73,9 @@ namespace GadgetLoader
 
         public void AddIndexBCPCommand(string filename)
         {
-            IndexBCPCommands += "bcp " + database + "." + indexTable + " in " + filename
+            //IndexBCPCommands += "bcp " + database + "." + indexTable + " in " + filename
+            IndexBCPCommands += "bcp " + "##table1_snap" + LoaderParamSingleton.getInstance().timestep + " in " + filename
                 + " -n -S " + server + " -T\r\n";
-
-
         }
 
         public void AddFOFBCPCommand(string filename)
@@ -142,7 +141,7 @@ namespace GadgetLoader
             using (StreamWriter writer = new StreamWriter(bcpFile))
             {
                 writer.WriteLine("@echo off");
-                writer.WriteLine(snapBCPCommands);
+                //writer.WriteLine(snapBCPCommands);
                 writer.WriteLine(FOFBCPCommands);
                 writer.WriteLine(FFTBCPCommands);
                 writer.WriteLine(IndexBCPCommands);

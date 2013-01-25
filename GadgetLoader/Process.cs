@@ -225,7 +225,7 @@ namespace GadgetLoader
                                 if (cell.Count > 0)
                                 {
                                     // TODO(INDEX) create Cell index here
-                                    particleBinWriter.WriteCell(cell);
+                                    //particleBinWriter.WriteCell(cell);
                                     List<ReverseIndexEntry> index = cell.createIndex();
                                     indexBinWriter.WriteReverseIndex(index);
                                     /*
@@ -251,7 +251,7 @@ namespace GadgetLoader
                         }
                         if (cell.Count > 0)
                         {
-                            particleBinWriter.WriteCell(cell);
+                            //particleBinWriter.WriteCell(cell);
                             List<ReverseIndexEntry> index = cell.createIndex();
                             indexBinWriter.WriteReverseIndex(index);
                             /*if (pars.firstSnapLoaded)

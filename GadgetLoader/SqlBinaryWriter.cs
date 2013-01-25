@@ -139,7 +139,7 @@ namespace GadgetLoader
 
         public void WriteReverseIndex(List<ReverseIndexEntry> index)
         {
-            LoaderParamSingleton pars = LoaderParamSingleton.getInstance();
+            /*LoaderParamSingleton pars = LoaderParamSingleton.getInstance();
             if (pars.firstSnapLoaded)
             {
                 foreach (ReverseIndexEntry entry in index)
@@ -164,6 +164,14 @@ namespace GadgetLoader
                     this.Write(entry.PHKey);
                     this.Write(entry.slot);
                 }
+            }*/
+
+            foreach (ReverseIndexEntry entry in index)
+            {
+                this.Write(entry.snapnum);
+                this.Write(entry.PHKey);
+                this.Write((int) entry.partID);
+                this.Write(entry.slot);
             }
 
 

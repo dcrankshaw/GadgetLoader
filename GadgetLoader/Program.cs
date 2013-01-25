@@ -45,7 +45,7 @@ namespace GadgetLoader
                 { "z|timestep=", "sets the {TIMESTEP} to transform",
                     (short v) => {opts.timestep = v; } },
                 { "1|firstsnap", "true if this is the first snapshot loaded for this simulation",
-                    v => {opts.firstSnap = true; } },
+                    v => {opts.firstSnap = true; } },   // DEPRECATED OPTION
                 /*{ "d|database=", "dictates what database the data will be loaded into",
                     v => {opts.database = v; } },
                 { "r|server=", "dictates what server the database is on",

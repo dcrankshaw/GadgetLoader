@@ -162,8 +162,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>exit 0
-ROBOCOPY $(TargetDir) \\gw18\Indra\code /MIR /LOG+:$(TargetDir)CopyLog.txt
+    <PostBuildEvent>ROBOCOPY $(TargetDir) \\gw18\Indra\code /MIR /LOG+:$(TargetDir)CopyLog.txt
 if errorlevel 4 goto BuildEventFailed
 if errorlevel 0 goto end
 :BuildEventFailed echo FILECOPY for $(ProjectName) failed

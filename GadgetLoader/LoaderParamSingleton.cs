@@ -50,6 +50,7 @@ namespace GadgetLoader
             snapTable = "dbo." + sim + "_ParticleData";
             FOFTable = "dbo." + sim + "_FoFGroupsData";
             FFTTable = "dbo." + sim + "_FFTData";
+            timestep = opts.timestep;
             if (firstSnapLoaded)
             {
                 indexTable = "dbo." + sim + "_ReverseIndex";
@@ -153,6 +154,8 @@ namespace GadgetLoader
         internal string FFTTable;
         internal string sim;
         internal string indexTable;
+
+        internal short timestep;
 
         internal Boolean createReverseIndex = true;
         internal Boolean firstSnapLoaded;
