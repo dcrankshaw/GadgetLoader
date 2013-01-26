@@ -28,3 +28,6 @@ C:\Users\crankshaw\Documents\GitHub\GadgetLoader\GadgetLoader\obj\Debug\ResGen.r
 C:\Users\crankshaw\Documents\GitHub\GadgetLoader\GadgetLoader\obj\Debug\ResGen.write.1.tlog
 C:\Users\crankshaw\Documents\GitHub\GadgetLoader\GadgetLoader\obj\Debug\GadgetLoader.exe
 C:\Users\crankshaw\Documents\GitHub\GadgetLoader\GadgetLoader\obj\Debug\GadgetLoader.pdb
+H:\GitHub\GadgetLoader\GadgetLoader\bin\Debug\GadgetLoader.exe.config
+H:\GitHub\GadgetLoader\GadgetLoader\obj\Debug\GadgetLoader.exe
+H:\GitHub\GadgetLoader\GadgetLoader\obj\Debug\GadgetLoader.pdb
