@@ -56,7 +56,7 @@
   <ItemGroup>
     <Reference Include="Jhu.SqlServer.Array, Version=1.0.3911.19822, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\SqlArray-Debug-x64-1.0.0.0\Jhu.SqlServer.Array.dll</HintPath>
+      <HintPath>..\..\SqlArray\Package\SqlArray-Release-x64-1.0\Jhu.SqlServer.Array.dll</HintPath>
     </Reference>
     <Reference Include="NDesk.Options">
       <HintPath>.\NDesk.Options.dll</HintPath>

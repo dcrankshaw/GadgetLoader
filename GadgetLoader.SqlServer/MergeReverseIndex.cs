@@ -42,6 +42,7 @@ public partial class UserDefinedFunctions
         short[] slots = new short[64];
         return SqlSmallIntArray.FromArray(slots).ToSqlBuffer();
     }
+
     
 
 };
