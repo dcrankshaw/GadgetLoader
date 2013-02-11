@@ -73,8 +73,8 @@ namespace GadgetLoader
 
         public void AddIndexBCPCommand(string filename)
         {
-            //IndexBCPCommands += "bcp " + database + "." + indexTable + " in " + filename
-            IndexBCPCommands += "bcp " + "##table1_snap" + LoaderParamSingleton.getInstance().timestep + " in " + filename
+            IndexBCPCommands += "bcp " + database + "." + indexTable + " in " + filename
+            //IndexBCPCommands += "bcp " + "##table1_snap" + LoaderParamSingleton.getInstance().timestep + " in " + filename
                 + " -n -S " + server + " -T\r\n";
         }
 

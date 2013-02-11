@@ -1,0 +1,12 @@
+C:\Users\crankshaw\Documents\GitHub\GadgetLoader\PeanoHilbertNeighbors\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\crankshaw\Documents\GitHub\GadgetLoader\PeanoHilbertNeighbors\bin\Debug\PeanoHilbertNeighbors.exe
+C:\Users\crankshaw\Documents\GitHub\GadgetLoader\PeanoHilbertNeighbors\bin\Debug\PeanoHilbertNeighbors.pdb
+C:\Users\crankshaw\Documents\GitHub\GadgetLoader\PeanoHilbertNeighbors\bin\Debug\GadgetLoader.exe
+C:\Users\crankshaw\Documents\GitHub\GadgetLoader\PeanoHilbertNeighbors\bin\Debug\NDesk.Options.dll
+C:\Users\crankshaw\Documents\GitHub\GadgetLoader\PeanoHilbertNeighbors\bin\Debug\Jhu.SqlServer.Array.dll
+C:\Users\crankshaw\Documents\GitHub\GadgetLoader\PeanoHilbertNeighbors\bin\Debug\Jhu.SqlServer.Array.Parser.dll
+C:\Users\crankshaw\Documents\GitHub\GadgetLoader\PeanoHilbertNeighbors\bin\Debug\GadgetLoader.pdb
+C:\Users\crankshaw\Documents\GitHub\GadgetLoader\PeanoHilbertNeighbors\bin\Debug\Jhu.SqlServer.Array.pdb
+C:\Users\crankshaw\Documents\GitHub\GadgetLoader\PeanoHilbertNeighbors\bin\Debug\Jhu.SqlServer.Array.Parser.pdb
+C:\Users\crankshaw\Documents\GitHub\GadgetLoader\PeanoHilbertNeighbors\obj\x86\Debug\PeanoHilbertNeighbors.exe
+C:\Users\crankshaw\Documents\GitHub\GadgetLoader\PeanoHilbertNeighbors\obj\x86\Debug\PeanoHilbertNeighbors.pdb
