@@ -127,6 +127,8 @@ namespace GadgetLoader
         {
             //DebugOut.PrintLine("PROCESSING SNAPSHOT WITH ARRAYS" + snap);
             // using this only if needed
+            bool writeParticlesBool = true;
+            bool writeIndexBool = true;
 
             List<SnapFileSummary> results = new List<SnapFileSummary>();
             //and make the directory, just to be safe
@@ -174,6 +176,7 @@ namespace GadgetLoader
                     return;
                 }
                 // now load the file
+                #region mainloop
                 try
                 {
                     SnapFile curSnap = new SnapFile(filename);
@@ -225,9 +228,18 @@ namespace GadgetLoader
                                 if (cell.Count > 0)
                                 {
                                     // TODO(INDEX) create Cell index here
-                                    //particleBinWriter.WriteCell(cell);
-                                    List<ReverseIndexEntry> index = cell.createIndex();
-                                    indexBinWriter.WriteReverseIndex(index);
+                                    if (writeParticlesBool)
+                                    {
+                                        particleBinWriter.WriteCell(cell);
+                                    }
+                                    //*********************************************************
+                                    if (writeIndexBool)
+                                    {
+                                        List<ReverseIndexEntry> index = cell.createIndex();
+                                        indexBinWriter.WriteReverseIndex(index);
+                                    }
+                                    //*********************************************************
+                                    
                                     /*
                                     if (pars.firstSnapLoaded)
                                     {
@@ -251,9 +263,17 @@ namespace GadgetLoader
                         }
                         if (cell.Count > 0)
                         {
-                            //particleBinWriter.WriteCell(cell);
-                            List<ReverseIndexEntry> index = cell.createIndex();
-                            indexBinWriter.WriteReverseIndex(index);
+                            if (writeParticlesBool)
+                            {
+                                particleBinWriter.WriteCell(cell);
+                            }
+                            //*********************************************************
+                            if (writeIndexBool)
+                            {
+                                List<ReverseIndexEntry> index = cell.createIndex();
+                                indexBinWriter.WriteReverseIndex(index);
+                            }
+                            //*********************************************************
                             /*if (pars.firstSnapLoaded)
                             {
                                 foreach (ReverseIndexEntry entry in index)
@@ -274,8 +294,8 @@ namespace GadgetLoader
 
                         // and add a bulk insert
                         //DebugOut.AddCommand(GetSnapDefault(outPath, snap, snapshotFilePrefix, curFile), snapshotTable);
-                        Console.WriteLine("..wrote " + curSnap.numSample + "/" + curSnap.numTotals[1] + " points");
-                        DebugOut.PrintLine("..wrote " + curSnap.numSample + "/" + curSnap.numTotals[1] + " points");
+                        //Console.WriteLine("..wrote " + curSnap.numSample + "/" + curSnap.numTotals[1] + " points");
+                        //DebugOut.PrintLine("..wrote " + curSnap.numSample + "/" + curSnap.numTotals[1] + " points");
                     }
                
 
@@ -318,6 +338,7 @@ namespace GadgetLoader
                     globals.summary.setFileSummaries(results);
                     return;
                 }
+                #endregion mainloop
 
             }
             globals.summary.setFileSummaries(results);

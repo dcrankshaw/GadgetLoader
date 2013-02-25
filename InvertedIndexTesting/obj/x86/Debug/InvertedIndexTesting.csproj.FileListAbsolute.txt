@@ -1,0 +1,5 @@
+C:\Users\crankshaw\Documents\GitHub\GadgetLoader\InvertedIndexTesting\bin\Debug\InvertedIndexTesting.exe
+C:\Users\crankshaw\Documents\GitHub\GadgetLoader\InvertedIndexTesting\bin\Debug\InvertedIndexTesting.pdb
+C:\Users\crankshaw\Documents\GitHub\GadgetLoader\InvertedIndexTesting\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\crankshaw\Documents\GitHub\GadgetLoader\InvertedIndexTesting\obj\x86\Debug\InvertedIndexTesting.exe
+C:\Users\crankshaw\Documents\GitHub\GadgetLoader\InvertedIndexTesting\obj\x86\Debug\InvertedIndexTesting.pdb
