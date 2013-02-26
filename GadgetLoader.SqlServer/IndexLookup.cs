@@ -421,7 +421,8 @@ public partial class UserDefinedFunctions
             // TODO: the faster way to do this might be to do each timestep separately, I think we will stay in memory that way???
             // I should figure out what the bottleneck here is though
 
-            string getActualDataStringRaw = "select distinct a.phkey, a.id, a.pos from SimulationDB.dbo.snaparr a, "
+            #region one_snap_at_a_time
+            /*string getActualDataStringRaw = "select distinct a.phkey, a.id, a.pos from SimulationDB.dbo.snaparr a, "
                 + phkeytable.ToString() + " b where a.snapnum = b.snap and a.phkey = b.phkey and a.snapnum = {0}";
             for (short currentSnap = 0; currentSnap < 64; ++currentSnap)
             {
@@ -442,7 +443,33 @@ public partial class UserDefinedFunctions
                     }
                 }
                 dataReader.Close();
+            }*/
+            #endregion one_snap_at_a_time
+
+            #region all_at_once
+            string getActualDataString = "select distinct a.snapnum, a.phkey, a.id, a.pos from SimulationDB.dbo.snaparr a, "
+                + phkeytable.ToString() + " b where a.snapnum = b.snap and a.phkey = b.phkey order by a.snapnum";
+
+            SqlCommand getActualDataCommand = new SqlCommand(getActualDataString, connection);
+            SqlDataReader dataReader = getActualDataCommand.ExecuteReader();
+            while (dataReader.Read())
+            {
+                short snap = Int16.Parse(dataReader["snapnum"].ToString());
+                long[] ids = (new SqlBigIntArrayMax(new SqlBytes((byte[])dataReader["id"])).ToArray());
+                SqlRealArrayMax positions = new SqlRealArrayMax(new SqlBytes((byte[])dataReader["pos"]));
+                int phkey = Int32.Parse(dataReader["phkey"].ToString());
+                float[] posArray = positions.ToArray();
+                foreach (short slot in phkeySlotMap[snap][phkey])
+                {
+                    //PosData currentPosComps = new PosData(ids[slot], posArray[slot, 0], posArray[slot, 1], posArray[slot, 2]);
+                    PosDataWithSnap currentPosComps = new PosDataWithSnap(snap, ids[slot], posArray[slot * 3 + 0], posArray[slot * 3 + 1], posArray[slot * 3 + 2]);
+                    idPositionMap.Add(currentPosComps);
+                }
             }
+            dataReader.Close();
+            
+            #endregion all_at_once
+
 
         }
         return idPositionMap;
