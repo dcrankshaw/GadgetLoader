@@ -26,7 +26,7 @@ namespace InvertedIndexTesting
                 for (int i = 0; i < numtrials; ++i)
                 {
                     //times.Add(runCreationTest(threads - 1));
-                    results[ind, i] = runCreationTest(threads - 1);
+                    results[ind, i] = runCreationTest(threads);
                     cleanupAfterBlocks(0, 127);
                 }
 
